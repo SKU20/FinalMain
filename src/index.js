@@ -18,18 +18,26 @@ app.get("/", (req,res)=>{
 app.get("/signup", (req,res)=>{
     res.render("signup")
 })
-
+app.post("/home", (req,res)=>{
+  const data = {
+    name:req.body.name,
+    lastname:req.body.lastname,
+    email:req.body.email,
+    phone:req.body.phone,
+    password:req.body.password,
+    date:req.body.date
+}
+ res.render("home",data);
+})
 app.post("/signup",async (req,res)=>{
   
-    const { email, password,repassword} = req.body;
+    const { email} = req.body;
     const user = await collection.findOne({ email });
     
      if(user){
         return res.render("signup",{error: "Email is already used"})
      }
-     else if(password !== repassword || !/[A-Z]/.test(password) || !/[0-9]/.test(password)){
-        return res.render("signup")
-     }
+    else{
      const data={
         name:req.body.name,
         lastname:req.body.lastname,
@@ -40,14 +48,22 @@ app.post("/signup",async (req,res)=>{
      }
 
    await collection.insertMany([data])
-
-   res.render("home")
+    
+   res.render("login", data);
+    }
 })
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
   
     const user = await collection.findOne({ email });
-  
+    const data={
+      name:user.name,
+      lastname:user.lastname,
+      email:user.email,
+      phone:user.phone,
+      password:user.password,
+      date:user.date
+   }
     if (!user) {
       return res.render("login", { error: "Invalid email or password." });
     }
@@ -56,8 +72,19 @@ app.post("/login", async (req, res) => {
       return res.render("login", { error: "Invalid email or password." });
     }
   
-    res.render("home");
+    res.render("home",user);
   });
+app.post("/profile", async (req,res) => {
+  const data = {
+      name:req.body.name,
+      lastname:req.body.lastname,
+      email:req.body.email,
+      phone:req.body.phone,
+      password:req.body.password,
+      date:req.body.date
+  }
+   res.render("profile",data);
+});
 app.listen(3001,()=>{
     console.log("prot Connected")
 })

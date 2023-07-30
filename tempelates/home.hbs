@@ -148,7 +148,7 @@ border:none;
 <title>hand-carved</title>
 </head>
 <body>
-    <form action="profile" method="post">
+    
         <div class="header">
             <div class="logo">
                 <a href="homepage.jsp" style="color:black;" class="home">
@@ -166,21 +166,23 @@ border:none;
                     <div class="profile-img">
                         <i class="fa-sharp fa-solid fa-circle-user"></i>
                     </div>
-                    <span style="margin-left: -5px;">${name}
-                          <c:set var="name" value="${sessionScope.name}" />
-                          <c:set var="lastname" value="${sessionScope.lastname}" />
-                          <c:set var="email" value="${sessionScope.email}" />
-                          <c:set var="phone" value="${sessionScope.phone}" />
-                          <c:set var="date" value="${sessionScope.date}" />
+                    <span style="margin-left: -5px;">{{name}}
                         <i class="fa-solid fa-caret-down"></i>
                     </span>
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
-                        <a href="profile.jsp">
+                      <form action="/profile" method="POST">
+                      <input type="hidden" name="name" value="{{name}}">
+                      <input type="hidden" name="lastname" value="{{lastname}}">
+                      <input type="hidden" name="email" value="{{email}}">
+                      <input type="hidden" name="phone" value="{{phone}}">
+                      <input type="hidden" name="date" value="{{date}}">
+                         <button type="submit" style="border: none; background: none; cursor: pointer;">
                             <i class="fa-regular fa-user"></i>
                             Profile
-                        </a>
+                        </button>
+                        </form>
                     </li>
                     <li class="profile-dropdown-list-item">
                         <a href="about.jsp">
@@ -199,33 +201,5 @@ border:none;
             </div>
         </div>
         
-    </form>
 </body>
-<script>
-    function toggleDropdown() {
-  var dropdownList = document.getElementById("dropdownList");
-  dropdownList.classList.toggle("show");
-}
-
-window.addEventListener("click", function (e) {
-  var dropdownBtn = document.querySelector(".profile-dropdown-btn");
-  var dropdownList = document.getElementById("dropdownList");
-  
-  if (!dropdownBtn.contains(e.target)) {
-    dropdownList.classList.remove("show");
-  }
-});
-var name = "${sessionScope.name}";
-
-        // Use the "history.pushState()" method to change the browser's history
-        if (!name) {
-            var url = window.location.href;
-            var index = url.indexOf("/homepage.jsp");
-            if (index !== -1) {
-                // Replace "/homepage.jsp" with "/index.jsp" in the URL
-                var newUrl = url.substring(0, index) + "/index.jsp";
-                history.pushState(null, null, newUrl);
-            }
-        }
-</script>
 </html>
