@@ -83,11 +83,11 @@
 <body>
   <div class="header">
    <form action="/home" method="post">
-                     <input type="hidden" name="name" value="{{name}}">
-                      <input type="hidden" name="lastname" value="{{lastname}}">
-                      <input type="hidden" name="email" value="{{email}}">
-                      <input type="hidden" name="phone" value="{{phone}}">
-                      <input type="hidden" name="date" value="{{date}}">
+                     <input type="hidden" name="name" value="<%= name %>">
+                     <input type="hidden" name="lastname" value="<%= lastname %>">
+                     <input type="hidden" name="email" value="<%= email %>">
+                     <input type="hidden" name="phone" value="<%= phone %>">
+                     <input type="hidden" name="date" value="<%= date %>">
    <button type="submit" style="border: none; background: none; cursor: pointer;">Hand-Carved</button>
    </form> 
   </div>
@@ -96,23 +96,23 @@
     <div class="profile-img">
       <i class="fa-sharp fa-solid fa-circle-user"></i>
     </div>
-    <h2 class="profile-name">{{name}}</h2>
+    <h2 class="profile-name"><%= name %></h2>
     <div class="profile-details">
       <div class="label-value-pair">
         <span class="label">First name:</span>
-        <span class="value">{{name}}</span>
+        <span class="value"><%= name %></span>
       </div>
       <div class="label-value-pair">
         <span class="label">Last name:</span>
-        <span class="value">{{lastname}}</span>
+        <span class="value"><%= lastname %></span>
       </div>
       <div class="label-value-pair">
         <span class="label">Email:</span>
-        <span class="value">{{email}}</span>
+        <span class="value"><%= email %></span>
       </div>
       <div class="label-value-pair">
         <span class="label">Phone number:</span>
-        <span class="value">{{phone}}</span>
+        <span class="value"><%= phone %></span>
       </div>
       <div class="label-value-pair">
         <span class="label">Password:</span>
@@ -123,7 +123,7 @@
       </div>
       <div class="label-value-pair">
         <span class="label">Date:</span>
-        <span class="value">{{date}}</span>
+        <span class="value"><%= date %></span>
       </div>
     </div>
   </div>

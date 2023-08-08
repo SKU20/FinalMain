@@ -1,60 +1,65 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://127.0.0.1:27017/userInformation")
+mongoose.connect("mongodb+srv://mate2003:Mate2003@finalweb.idhlajf.mongodb.net/userInformation")
 .then(()=>{
-    console.log("userinfo Connected")
+    console.log("mongodb Connected")
 })
 .catch((err)=>{
     console.log(err)
 })
+
 const LogInSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
-  lastname: {
-    type: String,
-    required: true
-  },
-  email: {
-    type: String,
-    required: true
-  },
-  phone: {
-    type: String,
-    required: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  date: {
-    type: String,
-    required: true
-  }
-});
+    name:{
+        type:String,
+        rquired:true
+    },
+    lastname:{
+        type:String,
+        rquired:true
+    },
+    email:{
+        type:String,
+        required:true
+    },
+    phone:{
+        type:String,
+        rquired:true
+    },
+    password:{
+        type:String,
+        required:true
+    },
+    date:{
+        type:String,
+        rquired:true
+    }
+})
+const productSchema = new mongoose.Schema({
+    ID:{
+        type:Number,
+        required:true
+    },
+    name:{
+        type:String,
+        rquired:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    price:{
+        type:Number,
+        required:true
+    },
+    photo:{
+        type:String,
+        rquired:true
+    }
+})
 
-const ProductSchema = new mongoose.Schema({
-  count: {
-    type: Number,
-    startAt: 1,
-    incrementBy: 1
-  },
-  photoName: {
-    type: String
-  },
-  name: {
-    type: String
-  },
-  description: {
-    type: String
-  },
-  price: {
-    type: Number
-  }
-});
+const collection = new mongoose.model("LoginInfo",LogInSchema)
+const productCollection = new mongoose.model("products",productSchema)
 
-const collection = mongoose.model("LoginInfo", LogInSchema);
-const productCollection = mongoose.model("products", ProductSchema);
+const Product = mongoose.model('Product', productSchema); // Define the Product model
 
-module.exports = { collection, productCollection };
+module.exports = ({collection,productCollection});

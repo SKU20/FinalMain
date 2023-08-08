@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,7 +125,7 @@
     }
 
     .form-error {
-      color: #DC3545;a
+      color: #DC3545;
       font-size: 14px;
       margin-top: 8px;
     }
@@ -147,7 +148,9 @@
     <a href="/" class="button button-red" onclick="logout()">Log Out</a>
     <div id="newProductForm" class="form-container" style="display: none;">
       <h2>Add New Product</h2>
+     
       <form action="/upload" method="post" enctype="multipart/form-data">
+        
         <label class="form-label" for="name">Product Name:</label>
         <input type="text" name="name" id="name" class="form-input" placeholder="Enter product name" required>
         <br>
@@ -180,35 +183,31 @@
           </tr>
         </thead>
         <tbody>
-        
-          <%
-            try {
-              Class.forName("com.mysql.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-              throw new RuntimeException(e);
-            }
-
-            ProductDao dao = new ProductDao(DriverManager.getConnection("jdbc:mysql://localhost:3308/products", "root", ""));
-            List<ProductDetails> list = dao.getAllProducts();
-            for (ProductDetails b : list) {
-          %>
-          <tr>
-            <td><%= b.getId() %></td>
-            <td><img src="images/<%=b.getPhotoName()%>" style="width: 100px; height: 120px;"></td>
-            <td><%= b.getName() %></td>
-            <td><%= b.getDescription() %></td>
-            <td><%= b.getPrice() %> USD</td>
-            <td>
-              <a href="edit_product.jsp?id=<%=b.getId()%>" class="edit-link">Edit</a>
-              <a href="delete?id=<%=b.getId() %>" class="remove-link">Remove</a>
-            </td>
-          </tr>
-          <input type="hidden" value="<%=b.getId() %>" name="id">
-          <% 
-            }
-          %>
-          
-        </tbody>
+          <% var id=1; %>
+          <% products.forEach(product => { %>
+            <tr>
+                <td><%= id %></td>
+                <input type="hidden" name="ID" value="<%= id %>">
+                <td><%= product.name %></td>
+                <td><img src="uploads/<%= product.photo %>" style="width: 120px; height: 120px;"></td>
+                <td>
+                  <% const maxDescriptionLength = 20; %>
+                  <% const truncatedDescription = product.description.length > maxDescriptionLength ? product.description.substring(0, maxDescriptionLength) + '...' : product.description; %>
+                  <%= truncatedDescription %>
+                </td>                
+                <td><%= product.price %> USD</td>
+                <td>
+                  <a href="/edit_product/<%= product._id %>" class="edit-link">Edit</a>
+                  <input type="hidden" name="MID" value="<%=product._id%>">
+                    <input type="hidden" name="name" value="<%=product.name%>">
+                    <input type="hidden" name="description" value="<%=product.description%>">
+                    <input type="hidden" name="price" value="<%=product.price%>">
+                    <a href="delete?id=<%= product.name %>" class="remove-link">Remove</a>
+                </td>
+            </tr>
+            <%id++;%>
+        <% }); %>
+    </tbody>
       </table>
     </div>
   </div>

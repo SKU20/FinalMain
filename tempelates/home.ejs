@@ -166,18 +166,18 @@ border:none;
                     <div class="profile-img">
                         <i class="fa-sharp fa-solid fa-circle-user"></i>
                     </div>
-                    <span style="margin-left: -5px;">{{name}}
+                    <span style="margin-left: -5px;"><%= name %>
                         <i class="fa-solid fa-caret-down"></i>
                     </span>
                 </div>
                 <ul class="profile-dropdown-list">
                     <li class="profile-dropdown-list-item">
                       <form action="/profile" method="POST">
-                      <input type="hidden" name="name" value="{{name}}">
-                      <input type="hidden" name="lastname" value="{{lastname}}">
-                      <input type="hidden" name="email" value="{{email}}">
-                      <input type="hidden" name="phone" value="{{phone}}">
-                      <input type="hidden" name="date" value="{{date}}">
+                      <input type="hidden" name="name" value="<%= name %>">
+                      <input type="hidden" name="lastname" value="<%= lastname %>">
+                      <input type="hidden" name="email" value="<%= email %>">
+                      <input type="hidden" name="phone" value="<%= phone %>">
+                      <input type="hidden" name="date" value="<%= date %>">
                          <button type="submit" style="border: none; background: none; cursor: pointer;">
                             <i class="fa-regular fa-user"></i>
                             Profile
