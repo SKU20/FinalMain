@@ -1,252 +1,281 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="ISO-8859-1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hand-carved</title>
-    <link rel="stylesheet" href="signup.css">
-    <link href="https://fonts.googleapis.com/css2?family=Julee&family=Pacifico&family=Russo+One&family=Satisfy&display=swap" rel="stylesheet">
+    <title>Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/371026b39a.js" crossorigin="anonymous"></script>
     <style>
-    
-body{
-    background-image: linear-gradient(to bottom right, #FD8451, #FFBD6F);
-    background-repeat: no-repeat;
-    position: fixed;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: "Roboto", Arial, sans-serif;
-    color: black;
-}
+        body {
+            background: linear-gradient(to bottom right, #ff7e5f, #feb47b);
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
 
-.container {
-    position: fixed;
-    left: 40%;
-    width: 400px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    padding: 30px;
-    height: 670px;
-}
+        .container {
+            width: 30%;
+            max-width: 1200px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            box-sizing: border-box;
+        }
 
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+        }
 
-.logo {
-    text-align: center;
-    font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: black;
-}
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
 
-.form-group {
-    margin-bottom: 20px;
-}
+        .form-group {
+            flex: 1;
+            margin: 0 10px;
+        }
 
-.form-group label {
-    display: block;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #555;
+        }
 
-.form-group input {
-    width: 100%;
-    height: 20px;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid black;
-    border-radius: 5px;
-}
+        .form-group input {
+            width: 100%;
+            height: 45px;
+            padding: 0 12px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-sizing: border-box;
+        }
 
-.form-group input:focus {
-    outline: none;
-    border-color: grey;
-}
+        .form-group input:focus {
+            border-color: #ff7e5f;
+            box-shadow: 0 0 8px rgba(255, 123, 95, 0.5);
+            outline: none;
+        }
 
-.forgot-password {
-    display: block;
-    text-align: right;
-    font-size: 14px;
-    color: black;
-    text-decoration: none;
-}
+        .password-requirements {
+            display: none;
+            margin-top: 10px;
+        }
 
-.forgot-password:hover {
-    text-decoration: underline;
-}
+        .password-requirements i {
+            display: block;
+            font-weight: 600;
+            color: red;
+        }
 
-.login-button {
-    width: 100%;
-    height: 40px;
-    background-color: #ccc;
-    color: black;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.2s;
-}
+        .password-requirements ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin: 0;
+            color: red;
+            font-size: 13px;
+        }
 
-.login-button:hover {
-    background-color: lightgray;
-}
+        .login-button {
+            width: 100%;
+            height: 50px;
+            background-color: #ff7e5f;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
 
-.social-icons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+        .login-button:hover {
+            background-color: #feb47b;
+        }
 
-.social-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    width: 40px;
-    height: 40px;
-    background-color: black;
-    border-radius: 50%;
-    margin: 0 5px;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.2s;
-}
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
 
-.social-icon:hover {
-    background-color: lightgrey;
-}
-#login:hover{
-    color:lightgrey;
-    text-decoration:none;
-}
-ul#requirements li {
-    color: red;
-     font-size: 13px;
-     margin-left: 0;
-     padding-left: 20px; 
-     display: none;
-      list-style: disc;
- }
+        .social-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            margin: 0 10px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
- ul#requirements li {
-            margin-left: -20px; 
-}
-ul i{
-    margin-left:-35px;
-    display:none;
-    color:red;
-}
+        .social-icon:hover {
+            background-color: #555;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .signup-link a {
+            color: #ff7e5f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .signup-link a:hover {
+            color: #feb47b;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 1024px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .form-group {
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .login-button {
+                font-size: 16px;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="container">
-        <div class="logo">Hand-carved</div>
+        <div class="logo">Sign Up</div>
         <form action="/signup" method="post">
-            <div class="form-group">
-                <input type="text" name="name" placeholder="First name" required>
-            </div>
-            <div class="form-group">
-                <input type="text" name="lastname" placeholder="Last name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-                <input type="text" name="phone" placeholder="Phone" required>
-            </div>
-            <div class="form-group">
-                <input type="password"id="password" name="password" placeholder="Password" required>
-                 <ul id="requirements">
-                       <i id="req">Password requirements</i>
-                       <li id="li1">Must contain at least 6 characters</li>
-                       <li id="li2">At least one capital letter</li>
-                       <li id="li3">At least one digit</li>
-                </ul>
-
-            </div>
-            <div class="form-group">
-                <input type="password" id="repassword" name="repassword" placeholder="Repeat password" required>
-            </div>
-            <div class="form-group">
-                <input type="date" name="date" required>
-            </div>
-            <button type="submit" id="submit" class="login-button">Sign up</button>
-            <div class="social-icons">
-                <div class="social-icon">
-                    <i class="fa-brands fa-facebook"></i>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">First Name</label>
+                    <input type="text" id="name" name="name" placeholder="First Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
                 </div>
             </div>
-            <div id="error" style="color: red; text-align: center; margin-top: 10px;"><%= error %></div>
-            <label id="email-used-error" style="display: none;">USed</label>
-            <div style="text-align: center; margin-top: 20px;">
-                Already have an account? <a href="/" id="login"style="color: black; text-decoration: underline;">Log in</a>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone" placeholder="Phone" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <div id="password-requirements" class="password-requirements">
+                        <i>Password requirements:</i>
+                        <ul>
+                            <li id="req1">Must contain at least 6 characters</li>
+                            <li id="req2">At least one capital letter</li>
+                            <li id="req3">At least one digit</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="repassword">Repeat Password</label>
+                    <input type="password" id="repassword" name="repassword" placeholder="Repeat Password" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+            </div>
+            <button type="submit" class="login-button" disabled>Sign Up</button>
+            <div class="social-icons">
+                <div class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-icon">
+                    <i class="fab fa-google"></i>
+                </div>
+            </div>
+            <div id="error" style="color: red; text-align: center; margin-top: 10px;"></div>
+            <div class="signup-link">
+                Already have an account? <a href="/login">Log in</a>
             </div>
         </form>
     </div>
-</body>
-<script>
-    const password = document.getElementById('password');
-    const ul = document.getElementById('requirements');
-    const li1 = document.getElementById('li1');
-    const li2 = document.getElementById('li2');
-    const li3 = document.getElementById('li3');
-    const uli = document.getElementById('req');
-    const repassword = document.getElementById('repassword');
-    const submitBtn = document.getElementById('submit');
+    <script>
+        const password = document.getElementById('password');
+        const repassword = document.getElementById('repassword');
+        const submitBtn = document.querySelector('.login-button');
+        const requirements = document.getElementById('password-requirements');
+        const req1 = document.getElementById('req1');
+        const req2 = document.getElementById('req2');
+        const req3 = document.getElementById('req3');
 
+        password.addEventListener('input', function () {
+            const passwordValue = password.value;
+            const hasCapital = /[A-Z]/.test(passwordValue);
+            const hasDigit = /[0-9]/.test(passwordValue);
+            const isLengthValid = passwordValue.length >= 6;
 
-  password.addEventListener('input', function() {
-        if (password.value.length < 6 || !/[A-Z]/.test(password.value) || !/[0-9]/.test(password.value)) {
-                password.style.border = '1px solid red';
-                ul.style.display = 'block';
-                uli.style.display = 'block';
-                submitBtn.disabled = true;
-            } else {
-                ul.style.display = 'none';
-                password.style.border = '1px solid grey';
-                uli.style.display = 'none';
-                submitBtn.disabled = false;
-            }
+            requirements.style.display = (isLengthValid && hasCapital && hasDigit) ? 'none' : 'block';
 
-            if (password.value.length >= 6) {
-                li1.style.display = 'none';
-            } else {
-                li1.style.display = 'block';
-                submitBtn.disabled = true;
-            }
+            req1.style.display = isLengthValid ? 'none' : 'list-item';
+            req2.style.display = hasCapital ? 'none' : 'list-item';
+            req3.style.display = hasDigit ? 'none' : 'list-item';
 
-            if (/[A-Z]/.test(password.value)) {
-                li2.style.display = 'none';
-            } else {
-                li2.style.display = 'block';
-                submitBtn.disabled = true;
-            }
+            submitBtn.disabled = !(isLengthValid && hasCapital && hasDigit);
+        });
 
-            if (/[0-9]/.test(password.value)) {
-                li3.style.display = 'none';
-            } else {
-                li3.style.display = 'block';
-                submitBtn.disabled = true;
-            }
-    
-});
-    repassword.addEventListener('input',function() {
-         if(repassword.value !== password.value || repassword.value == ""){
+        repassword.addEventListener('input', function () {
+            if (repassword.value !== password.value || repassword.value === "") {
                 repassword.style.border = '1px solid red';
                 submitBtn.disabled = true;
-            }else{
+            } else {
                 repassword.style.border = '1px solid grey';
                 submitBtn.disabled = false;
             }
-    });
-</script>
+        });
+    </script>
+</body>
+
 </html>

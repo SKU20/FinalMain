@@ -3,8 +3,8 @@ const multer = require("multer")
 const app = express()
 const path=require("path")
 const async = require('hbs/lib/async')
-const { collection, productCollection } = require("./mongodb");
-const { ObjectId } = require("mongodb"); 
+const { User, Product } = require("./database");
+
 
 const tempelatePath = path.join(__dirname,'../tempelates')
 
@@ -51,63 +51,71 @@ app.post("/home", (req,res)=>{
  res.render("home",data);
 })
 //Sign up
-app.post("/signup",async (req,res)=>{
-    const user = await collection.findOne({ email });
-    
-     if(user){
-        error_msg="Email is already used";
-        return res.render("signup",{error: error_msg})
-     }
-    else{
-     const data={
-        name:req.body.name,
-        lastname:req.body.lastname,
-        email:req.body.email,
-        phone:req.body.phone,
-        password:req.body.password,
-        date:req.body.date
-     }
+app.post('/signup', async (req, res) => {
+  try {
+      const existingUser = await User.findOne({ where: { email: req.body.email } });
+      const error_msg = "Invalid email or password";
+      if (existingUser) {
+          const error_msg = "Email is already used";
+          return res.render("signup", { error: error_msg });
+      } else {
+          const newUser = await User.create({
+              name: req.body.name,
+              lastname: req.body.lastname,
+              email: req.body.email,
+              phone: req.body.phone,
+              password: req.body.password,
+              date: req.body.date
+          });
 
-   await collection.insertMany([data])
-    
-   res.render("login", data);
-    }
-})
+          res.render("login", newUser, {error: error_msg});
+      }
+  } catch (error) {
+      console.error('Error:', error);
+      res.status(500).send('An error occurred.');
+  }
+});
+
 //Login
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await collection.findOne({ email });
+  try {
+    const user = await User.findOne({ where: { email } });
 
-  if (!user) {
-    return res.render("login", { error: "Invalid email or password." });
-  }
-
-  if (user.email === "lukalevidze@yahoo.com" && user.password === "Luka1964") {
-    try {
-      const products = await productCollection.find({}).exec();
-      return res.render('admin', { products });
-    } catch (error) {
-      console.error('Error:', error);
-      return res.status(500).send('An error occurred.');
+    if (!user) {
+      return res.render("login", { error: "Invalid email or password." });
     }
+
+    if (user.password === password) {
+      if (user.email === "lukalevidze@yahoo.com" && user.password === "Luka1964") {
+        try {
+          const products = await Product.findAll();
+          return res.render('admin', { products });
+        } catch (error) {
+          console.error('Error:', error);
+          return res.status(500).send('An error occurred.');
+        }
+      }
+      const data = {
+        name: user.name,
+        lastname: user.lastname,
+        email: user.email,
+        phone: user.phone,
+        password: user.password,
+        date: user.date
+      };
+
+      return res.render("home", data);
+    } else {
+      return res.render("login", { error: "Invalid email or password." });
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).send('An error occurred.');
   }
-
-  if (user.password !== password) {
-    return res.render("login", { error: "Invalid email or password." });
-  }
-
-  const data = {
-    name: user.name,
-    lastname: user.lastname,
-    email: user.email,
-    phone: user.phone,
-    password: user.password,
-    date: user.date
-  };
-
-  res.render("home", data);
 });
+
 //User profile
 app.post("/profile", async (req,res) => {
   const data = {
